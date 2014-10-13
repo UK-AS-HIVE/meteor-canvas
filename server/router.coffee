@@ -1,6 +1,3 @@
-Router.configure ->
-  Npm.require('connect')
-
 Router.map ->
   #Home Route
   @route 'Home',
