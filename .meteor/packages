@@ -9,4 +9,5 @@ oauth2
 coffeescript
 iron:router
 backbone
+accounts-base
 
