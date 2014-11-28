@@ -1,3 +1,28 @@
+OAuth.registerService('canvas',2,null,function(query) {
+  var code = getCode(query);
+  //TODO: figure out what's going on with the redirect URI
+  var accessToken = getAccessToken(code);
+  var identity = "steve";
+  var serviceData = {
+    accessToken: accessToken,
+    expiresAt: (+new Date) + 100000
+  }
+
+  return {
+    serviceData: serviceData,
+    options: {profile: {name: identity}}
+  };
+}); 
+
+var isJSON = function (str) {
+  try {
+    JSON.parse(str);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 var getCode = function(query) {
   //Sends a GET request to the canvas installation for a code. (Step 1 in Canvas OAuth flow)
   var config = Meteor.settings.canvasConfig;
@@ -12,7 +37,7 @@ var getCode = function(query) {
         response_type: code,
         redirect_uri: config.redirectUri
       }
-    }.content;
+    }).content;
   } catch (err) {
     throw _.extend(new Error("Failed to complete OAuth handshake with Canvas. " + err.message),
                     {response: err.response});
