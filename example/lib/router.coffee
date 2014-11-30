@@ -1,3 +1,4 @@
+###
 Router.map ->
   #Home Route
   @route 'Home',
@@ -22,3 +23,4 @@ Router.map ->
       UserData.insert(provider.body)
       @response.writeHead(200, {'Content-Type': 'text/html'});
       @response.end();
+###

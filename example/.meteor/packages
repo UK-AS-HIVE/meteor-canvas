@@ -7,8 +7,9 @@ meteor-platform
 insecure
 oauth2
 coffeescript
-iron:router
 backbone
 accounts-base
 oauth
+accounts-ui
+hive:accounts-canvas
 

@@ -9,6 +9,9 @@ Package.onUse(function(api) {
   api.use('accounts-base', ['client', 'server']);
   api.imply('accounts-base',['client','server']);
   api.use('accounts-oauth', ['client', 'server']);
+  api.use('oauth2', ['client', 'server']);
+  api.use('oauth', ['client', 'server']);
+  api.use('underscore','server');
 
   api.add_files('canvas_server.js','server');
   api.add_files('canvas_client.js','client');
