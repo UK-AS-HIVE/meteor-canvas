@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'meteor-accounts-canvas',
-  summary: ' /* Fill me in! */ ',
+  name: 'hive:accounts-canvas',
+  summary: 'A package to implement Canvas authentication via OAuth',
   version: '1.0.0',
-  git: ' /* Fill me in! */ '
+  git: 'https://github.com/UK-AS-HIVE/meteor-accounts-canvas'
 });
 
 Package.onUse(function(api) {
