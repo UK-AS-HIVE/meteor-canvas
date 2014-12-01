@@ -6,7 +6,7 @@ Canvas.requestCredential = function (options, credentialRequestCompleteCallback)
     options = {};
   }
 
-  var config = Meteor.settings.canvasConfig;
+  var config = ServiceConfiguration.configurations.findOne({service: 'canvas'});
   if (!config) {
     credentialRequestCompleteCallback && credentialRequestCompleteCallback(
     new ServiceConfiguration.ConfigError());
