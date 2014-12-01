@@ -1,7 +1,7 @@
 OAuth.registerService('canvas',2,null,function(query) {
   //Weird hack to not reject self-signed certs in dev environment.
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
-  
+  console.log(query);
   var code = getCode(query);
   var accessToken = getAccessToken(code);
   var identity = "test";
@@ -32,36 +32,39 @@ var getCode = function(query) {
     throw new ServiceConfiguration.ConfigError();
 
   var responseContent;
+  var url = config.url + "login/oauth2/auth";
   try {
-    responseContent = HTTP.get(config.url + "login/oauth2/auth", {
+    responseContent = HTTP.get("https://localhost/login/oauth2/auth", {
       params: {
         client_id: config.client_id,
         response_type: "code",
         redirect_uri: OAuth._redirectUri('canvas',config)
       }
-    }).content;
+    }).data;
+  console.log(responseContent);
   } catch (err) {
-    throw _.extend(new Error("Failed to complete OAuth handshake with Canvas. " + err.message),
+    throw _.extend(new Error("Failed to complete OAuth handshake with Canvas - GET" + err.message),
                     {response: err.response});
   }
   return responseContent;
 };
 
-var getAccessToken = function (query) {
+var getAccessToken = function (code) {
   //Sends a POST request for the OAuth access token for our user. (Step 3)
   var config = ServiceConfiguration.configurations.findOne({service: 'canvas'});
+  var postResponse;
   try {
-    responseContent = HTTP.post(config.url + 'login/oauth/token', {
+    postResponse = HTTP.post(config.url + 'login/oauth/token', {
       params: {
-        client_id: config.clientId,
+        client_id: config.client_id,
         redirect_uri: OAuth._redirectUri('canvas',config),
-        client_secret: OAuth.openSecret(config.secret),
-        code: query.code
+        client_secret: config.client_secret,
+        code: code
       }
-    }).content;
-  console.log(responseContent);
+    }).data;
+  console.log(postResponse);
   } catch (err) {
-    throw _.extend(new Error("Failed to complete OAuth handshake with Canvas. " + err.message),
+    throw _.extend(new Error("Failed to complete OAuth handshake with Canvas - POST " + err.message),
                     {response: err.response});
   }
 
