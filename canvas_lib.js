@@ -10,4 +10,9 @@ if(Meteor.isClient) {
     var credentialRequestCompleteCallback  = Accounts.oauth.credentialRequestCompleteHandler(callback);
     Canvas.requestCredential(options, credentialRequestCompleteCallback);
   };
+} else {
+  Accounts.addAutopublishFields({
+    forLoggedInUser: ['services.canvas'],
+    forOtherUsers: ['services.canvas.name']
+  });
 }

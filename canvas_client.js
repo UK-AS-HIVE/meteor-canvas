@@ -18,17 +18,11 @@ Canvas.requestCredential = function (options, credentialRequestCompleteCallback)
 
   var loginStyle = OAuth._loginStyle('canvas', config, options);
 
-  var loginPath = '_oauth/canvas/?requestTokenAndRedirect=true'
-        + '&state=' +OAuth._stateParam(loginStyle,credentialToken);
-
-  if (Meteor.isCordova) {
-    loginPath = loginPath + "&cordova=true";
-    if(/Android/i.test(navigator.userAgent)) {
-      loginPath = loginPath + "&android=true";
-    }
-  }
-
-  var loginUrl = Meteor.absoluteUrl(loginPath);
+  var loginUrl = config.url + '/login/oauth2/auth?' + 
+        'client_id=' + config.client_id +
+        '&response_type=code' +
+        '&redirect_uri=' + OAuth._redirectUri('canvas',config) +
+        '&state=' +OAuth._stateParam(loginStyle,credentialToken);
 
   OAuth.launchLogin({
     loginService: "canvas",
