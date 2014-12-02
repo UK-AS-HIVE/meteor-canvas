@@ -1,0 +1,19 @@
+<template name="configureLoginServiceDialogForCanvas">
+  <p>
+    You'll need to generate a Developer Key in your Canvas installation. Follow these steps:
+  </p>
+  <ol>
+    <li>
+      Visit https://YOUR-CANVAS-URL/developer_keys and log in with your administrative account.
+    </li>
+    <li>
+      Click "Add Developer Key".
+    </li>
+    <li>
+      Choose a Key Name, Tool ID, and insert your Owner Email and Icon URL if you have them.
+    </li>
+    <li>
+      Set Redirect URI to <span class="url">{{siteUrl}}</span> and click "Save Key".
+    </li>
+  </ol>
+</template>
