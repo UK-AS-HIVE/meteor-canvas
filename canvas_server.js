@@ -1,6 +1,4 @@
 OAuth.registerService('canvas',2,null,function(query) {
-  //Weird hack to not reject self-signed certs in dev environment.
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
   var response = getTokenResponse(query);
   var serviceData = {
     accessToken: response.accessToken,
@@ -14,12 +12,11 @@ OAuth.registerService('canvas',2,null,function(query) {
 }); 
 
 var getTokenResponse = function (query) {
-  console.log(query);
   //Sends a POST request with the code we received in our GET response on the client.
   var config = ServiceConfiguration.configurations.findOne({service: 'canvas'});
   var postResponse;
   try {
-    postResponse = HTTP.post(config.url + 'login/oauth2/token', {
+    postResponse = HTTP.post(config.url + '/login/oauth2/token', {
       params: {
         client_id: config.client_id,
         redirect_uri: OAuth._redirectUri('canvas',config),
