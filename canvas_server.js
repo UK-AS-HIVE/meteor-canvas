@@ -1,7 +1,8 @@
 OAuth.registerService('canvas',2,null,function(query) {
   var response = getTokenResponse(query);
+  console.log(response);
   var serviceData = {
-    accessToken: response.accessToken,
+    accessToken: response.access_token,
     expiresAt: (+new Date) + 100000
   }
   _.extend(serviceData,response.user);
