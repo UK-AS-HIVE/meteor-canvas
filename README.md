@@ -12,5 +12,9 @@ For the moment, this package will need to be cloned and added to your project ma
 ##Usage##
 From the client, call `Canvas.requestCredential` with a `credentialRequestCompleteHandler` to request an access token for a user. 
 
+##TODO##
+This implements the OAuth flow from an App to Canvas, but still needs a route to receive POST data from Canvas and send a grade passback. 
+
 ##License##
 MIT.
+
