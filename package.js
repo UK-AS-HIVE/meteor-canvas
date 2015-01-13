@@ -1,7 +1,7 @@
 Package.describe({
   name: 'hive:canvas',
   summary: 'A package to implement the Canvas LMS Oauth Flow.',
-  version: '1.0.0',
+  version: '0.1.0',
   git: 'https://github.com/UK-AS-HIVE/meteor-canvas'
 });
 
@@ -13,7 +13,7 @@ Package.onUse(function(api) {
   api.use('random','client');
   api.use('templating','client');
   api.use('service-configuration',['client','server']);
-
+  api.versionsFrom("0.9.4");
   api.export('Canvas');
   
   api.add_files(
