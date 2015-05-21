@@ -3,8 +3,8 @@ OAuth.registerService('canvas',2,null,function(query) {
   console.log(response);
   var serviceData = {
     accessToken: response.access_token,
-    expiresAt: (+new Date) + 100000
-  }
+    expiresAt: (+new Date()) + 100000
+  };
   _.extend(serviceData,response.user);
   return {
     serviceData: serviceData,
@@ -33,4 +33,4 @@ var getTokenResponse = function (query) {
 
 
   return postResponse;
-}
+};

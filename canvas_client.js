@@ -8,8 +8,8 @@ Canvas.requestCredential = function (options, credentialRequestCompleteCallback)
 
   var config = ServiceConfiguration.configurations.findOne({service: 'canvas'});
   if (!config) {
-    credentialRequestCompleteCallback && credentialRequestCompleteCallback(
-    new ServiceConfiguration.ConfigError());
+    var err = new ServiceConfiguration.ConfigError();
+    credentialRequestCompleteCallback && credentialRequestCompleteCallback(err);
     return;
   }
 
